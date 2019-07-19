@@ -1,10 +1,14 @@
 ##楠楠社区
 
 ##资料
-https://spring.io/guides/ ---->spring文档
-https://spring.io/guides/gs/serving-web-content/
-http://elasticsearch.cn/explore---->社区
-https://github.com/yaojianannan/community/settings/keys----->创建ssh key
-https://v3.bootcss.com-----前端框架BootStarp
+[spring 文档](https:[/spring.io/guides/ )
+[Spring Web](https://spring.io/guides/gs/serving-web-content/)
+[es社区](http://elasticsearch.cn/explore)
+[github deploy key](https://github.com/yaojianannan/community/settings/keys)
+[前端框架BootStarp](https://v3.bootcss.com)
+[Github Oauth](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/)
+[okhttp](https://square.github.io/okhttp/)
+[fastjson](https://mvnrepository.com/artifact/com.alibaba/fastjson)
 ##工具
-https://git-scm.com/download
+[git](https://git-scm.com/download)
+[vp](https://www.visual-paradigm,com)
