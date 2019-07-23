@@ -10,8 +10,6 @@ import org.apache.ibatis.annotations.Select;
 
 /**
  * Created by BJB139 on 2019/7/21.
- * @author nannan
- * @param
  *
  */
 @Mapper

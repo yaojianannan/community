@@ -35,6 +35,7 @@ public class AuthorizeController {
 
     @Autowired
     private  UserMapper userMapper;
+
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code")String code,
                            @RequestParam(name = "state")String state,
@@ -51,7 +52,6 @@ public class AuthorizeController {
         System.out.print(githubuser.getId());
         if(githubuser != null)
         {
-
             User user= new User();
             String token = UUID.randomUUID().toString();
             user.setToken(token);
@@ -62,8 +62,6 @@ public class AuthorizeController {
             userMapper.insert(user);
             response.addCookie(new Cookie("token",token));
             //用户登陆成功，写session和cookie
-
-
             return "redirect:/";
         }else{
             //登陆失败，重新登陆
