@@ -17,3 +17,7 @@
 ##工具
 [git](https://git-scm.com/download)
 [vp](https://www.visual-paradigm,com)
+[flyway](https://flywaydb.org/getstarted/firststeps/maven)
+'''bash
+ mvn flyway:migrate
+'''
