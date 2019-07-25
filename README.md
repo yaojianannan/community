@@ -14,6 +14,8 @@
 [h2database](http://www.h2database.com/html/main.html)
 [mvn仓库](https://mvnrepository.com/)
 [spring boot mybatis](http://www.mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/)
+[lombok](https://projectlombok.org/setup/maven)
+[thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#setting-the-value-of-any-attribute)
 ##工具
 [git](https://git-scm.com/download)
 [vp](https://www.visual-paradigm,com)
