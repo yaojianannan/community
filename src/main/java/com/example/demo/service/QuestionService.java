@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.PaginationDTO;
 import com.example.demo.dto.QuestionDTO;
 import com.example.demo.mapper.QuestionMapper;
 import com.example.demo.mapper.UserMapper;
@@ -23,9 +24,17 @@ public class QuestionService {
     @Autowired
     private QuestionMapper questionMapper;
 
-    public List<QuestionDTO> list() {
-        List<Question> questionList = questionMapper.list();
+    public PaginationDTO list(Integer page, Integer size) {
+        PaginationDTO paginationDTO = new PaginationDTO();
+        Integer totalCount = questionMapper.count();//数据库中所有数据的条数
+        paginationDTO.setPagination(totalCount,page,size);
+        if(page<1){ page = 1;}
+        if(page > paginationDTO.getTotalPage()) {page = paginationDTO.getTotalPage();}
+
+        Integer offset = size * (page - 1);
+        List<Question> questionList = questionMapper.list(offset,size);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
+
         for (Question question : questionList)
         {
             User user = userMapper.findById(question.getCreator());
@@ -35,8 +44,14 @@ public class QuestionService {
             questionDTOList.add(questionDTO);
 
         }
+        paginationDTO.setQuestions(questionDTOList);
+//        for(QuestionDTO question : paginationDTO.getQuestions()){
+//            System.out.println(question.getUser().getToken());
+//                   System.out.println(question.getUser().getAvatar_url());
+//        }
 
-        return questionDTOList;
+
+        return paginationDTO;
     }
 }
 
