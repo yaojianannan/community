@@ -37,15 +37,18 @@ public class ProFileController {
         {
             model.addAttribute("section","question");
             model.addAttribute("sectionName","我的提问");
+            PaginationDTO paginationDTO = questionService.list(user.getId(),page,size);
+            model.addAttribute("paginations",paginationDTO);
 
         }else if("replies".equals(action))
         {
             model.addAttribute("section","replies");
             model.addAttribute("sectionName","最新回复");
+            PaginationDTO paginationDTO = questionService.list(user.getId(),page,size);
+            model.addAttribute("paginations",paginationDTO);
         }
 
-        PaginationDTO paginationDTO = questionService.list(user.getId(),page,size);
-        model.addAttribute("paginations",paginationDTO);
-       return "profile";
+
+        return "profile";
     }
 }

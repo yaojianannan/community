@@ -72,6 +72,7 @@ public class AuthorizeController {
 
     }
 
+    //退出登录，删除cookie，session
     @GetMapping("/logout")
     public String logout(HttpServletRequest request,
                           HttpServletResponse response){
