@@ -28,30 +28,71 @@ public class QuestionService {
         PaginationDTO paginationDTO = new PaginationDTO();
         Integer totalCount = questionMapper.count();//数据库中所有数据的条数
         paginationDTO.setPagination(totalCount,page,size);
+        //控制数据库中页面数
         if(page<1){ page = 1;}
         if(page > paginationDTO.getTotalPage()) {page = paginationDTO.getTotalPage();}
-
+        //offset偏移  size 查询条数
         Integer offset = size * (page - 1);
         List<Question> questionList = questionMapper.list(offset,size);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
-
+        //把user与question关联
         for (Question question : questionList)
         {
-            User user = userMapper.findById(question.getCreator());
+            User user = userMapper.findById(question.getUser_id());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question,questionDTO);
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
 
         }
+        //封装
         paginationDTO.setQuestions(questionDTOList);
 //        for(QuestionDTO question : paginationDTO.getQuestions()){
 //            System.out.println(question.getUser().getToken());
 //                   System.out.println(question.getUser().getAvatar_url());
 //        }
-
-
         return paginationDTO;
     }
+
+    public PaginationDTO list(Integer userId, Integer page, Integer size) {
+        PaginationDTO paginationDTO = new PaginationDTO();
+        Integer totalCount = questionMapper.countById(userId);//数据库中所有数据的条数
+
+        paginationDTO.setPagination(totalCount,page,size);
+
+        //控制数据库中页面数
+        if(page<1){ page = 1;}
+        if(page > paginationDTO.getTotalPage()) {page = paginationDTO.getTotalPage();}
+
+        //offset偏移  size 查询条数
+        Integer offset = size * (page - 1);
+        //如果userID在question表中不存在
+        List<Question> questionList = new ArrayList<>();
+        List<Question> questions = questionMapper.selectByUserId(userId);
+        List<QuestionDTO> questionDTOList = new ArrayList<>();
+        //如果totalCount = 0,
+       if(totalCount == 0) {questionDTOList.add(null);}
+       else{
+           questionList = questionMapper.listByUserId(userId,offset,size);
+
+
+           //把user与question关联
+           for (Question question : questionList)
+           {
+               User user = userMapper.findById(question.getUser_id());
+               QuestionDTO questionDTO = new QuestionDTO();
+               BeanUtils.copyProperties(question,questionDTO);
+               questionDTO.setUser(user);
+               questionDTOList.add(questionDTO);
+
+           }
+       }
+
+        //封装
+        paginationDTO.setQuestions(questionDTOList);
+        return paginationDTO;
+     }
+
+
 }
 

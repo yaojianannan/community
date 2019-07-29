@@ -13,7 +13,7 @@ public class Question {
  private String tag;
  private Long gmt_create;
  private Long gmt_modified;
- private Integer creator;
+ private Integer user_id;
  private Integer comment_count;
  private Integer view_count;
  private Integer like_count;

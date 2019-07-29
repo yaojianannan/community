@@ -33,6 +33,7 @@ public class IndexController {
                         Model model,
                         @RequestParam(name ="page" ,defaultValue = "1") Integer page,
                         @RequestParam(name = "size",defaultValue = "2") Integer size){
+         //持久化登录
         Cookie[] cookies = request.getCookies();
        if(cookies != null && cookies.length != 0) {
            for (Cookie cookie :cookies)
@@ -48,7 +49,6 @@ public class IndexController {
                }
            }
        }
-
        PaginationDTO pagination = questionService.list(page,size);
        model.addAttribute("paginations",pagination);
 
