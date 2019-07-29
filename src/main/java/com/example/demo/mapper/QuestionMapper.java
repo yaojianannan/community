@@ -1,5 +1,6 @@
 package com.example.demo.mapper;
 
+import com.example.demo.dto.QuestionDTO;
 import com.example.demo.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -31,4 +32,8 @@ public interface QuestionMapper {
 
     @Select("select * from questions where user_id = #{userId}")
     List<Question> selectByUserId(@Param(value = "userId") Integer userID);
+
+
+    @Select("select * from questions where id = #{id}")
+    Question getById(@Param(value = "id") Integer id);
 }

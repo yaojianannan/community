@@ -66,16 +66,14 @@ public class QuestionService {
 
         //offset偏移  size 查询条数
         Integer offset = size * (page - 1);
-        //如果userID在question表中不存在
         List<Question> questionList = new ArrayList<>();
         List<Question> questions = questionMapper.selectByUserId(userId);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
-        //如果totalCount = 0,
+        //如果totalCount = 0,即当前登录用户没有发布过问题时
        if(totalCount == 0) {questionDTOList.add(null);}
        else{
+           //根据Userid查询数据实现分页
            questionList = questionMapper.listByUserId(userId,offset,size);
-
-
            //把user与question关联
            for (Question question : questionList)
            {
@@ -94,5 +92,11 @@ public class QuestionService {
      }
 
 
+    public QuestionDTO getById(Integer id) {
+        Question question = questionMapper.getById(id);
+        QuestionDTO questionDTO = new QuestionDTO();
+        BeanUtils.copyProperties(question,questionDTO);
+        return  questionDTO;
+    }
 }
 
