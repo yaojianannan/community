@@ -2,10 +2,7 @@ package com.example.demo.mapper;
 
 import com.example.demo.dto.QuestionDTO;
 import com.example.demo.model.Question;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import sun.awt.SunHints;
 
 import java.util.List;
@@ -35,5 +32,8 @@ public interface QuestionMapper {
 
 
     @Select("select * from questions where id = #{id}")
-    Question getById(@Param(value = "id") Integer id);
+     Question getById(@Param(value = "id") Integer id);
+
+    @Update("update questions set title = #{title},description = #{description},tag = #{tag},gmt_modified = #{gmt_modified} where id = #{id}")
+    void update(Question question);
 }
